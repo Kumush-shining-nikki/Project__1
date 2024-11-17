@@ -1,0 +1,182 @@
+    <style>
+        /* Resetting default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container styling to center the card */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Gradient background */
+        }
+
+        /* Contact card styling */
+        .contact-card {
+            background: #ffffff;
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+            padding: 40px; /* Increased padding */
+            max-width: 600px; /* Max width of the card */
+            width: 100%;
+            text-align: center;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden; /* Hide overflow for smooth effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for effects */
+        }
+
+        /* Card hover effect */
+        .contact-card:hover {
+            transform: translateY(-10px); /* More pronounced lift on hover */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+        }
+
+        /* Decorative elements for the card */
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 123, 255, 0.1); /* Light blue overlay */
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .contact-card h2 {
+            font-size: 32px; /* Increased font size */
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600; /* Bold header */
+            z-index: 1; /* Ensure header is above the overlay */
+        }
+
+        /* Contact info styling */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Adjusted gap */
+            z-index: 1; /* Ensure info items are above the overlay */
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Space between icon and text */
+            font-size: 18px; /* Font size */
+            color: #555;
+        }
+
+        .contact-item i {
+            font-size: 24px; /* Icon size */
+            color: #007bff;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .contact-card {
+                padding: 20px; /* Reduced padding for smaller screens */
+            }
+
+            .contact-card h2 {
+                font-size: 24px; /* Reduced font size for smaller screens */
+            }
+
+            .contact-item {
+                font-size: 16px; /* Reduced font size for smaller screens */
+            }
+        }
+
+        /* Font Awesome icons (add this if using Font Awesome) */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+    </style>
+<body>
+<div class="row align-items-center bg-white py-3 px-lg-5">
+        <div class="col-lg-4">
+            <a href="/api" class="navbar-brand p-0 d-none d-lg-block">
+                <h1 class="m-0 display-4 text-uppercase text-primary text-secondary font-weight-normal">
+                    <span>Yangiliklar</span>
+                </h1>
+            </a>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/api" class="nav-item nav-link">Yangiliklar</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">Turkumlar</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/api/local" class="dropdown-item">O'zbekiston</a>
+                            <a href="/api/global" class="dropdown-item">Jahon</a>
+                            <a href="/api/sport" class="dropdown-item">Sport</a>
+                            <a href="/api/texnologiya" class="dropdown-item">Texnologiya</a>
+                        </div>
+                    </div>
+                    <a href="/api/latestnews" class="nav-item nav-link">So'ngi yangiliklar</a>
+                    <a href="/api/contact" class="nav-item nav-link active">Aloqa</a>
+                </div>
+
+                {{#if token}}
+                    <a href="/api/add">
+                        <button class="addnews-button">Yangiliklar Qo'shish</button>
+                    </a>
+                {{/if}}
+
+                {{#if token}}
+                <a href="/api/logout">
+                    <button class="login-button">Chiqish</button>
+                </a>
+                {{else}}
+                <a href="/api/login">
+                    <button class="login-button">Kirish</button>
+                </a>
+                {{/if}}
+
+                {{#if token}}
+                {{#if user}}
+                <div class="profile-icon">
+                    <a class="btn bg-warning rounded-circle ms-3" href="/api/profile/{{userId}}">
+                        <small class="fa fa-user"> </small>
+                    </a>
+                </div>
+                {{/if}}
+                {{/if}}
+
+            </div>
+        </nav>
+    </div>
+
+  <div class="contact-card">
+        <h2>Biz bilan bog'lanish</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fa fa-map-marker"></i>
+                <p>Xorazm viloyati Urganch shahar Tinchlik k.</p>
+            </div>
+            <div class="contact-item">
+                <i class="fa fa-phone"></i>
+                <p>(88) 888-88-88</p>
+            </div>
+            <div class="contact-item">
+                <i class="fa fa-envelope"></i>
+                <p>news123@gmail.com</p>
+            </div>
+        </div>
+    </div>
+  
+
+</body>

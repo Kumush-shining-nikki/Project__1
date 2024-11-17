@@ -1,0 +1,153 @@
+<body>
+    <!-- Topbar Start -->
+    <div class="row align-items-center bg-white py-3 px-lg-5">
+        <div class="col-lg-4">
+            <a href="/api" class="navbar-brand p-0 d-none d-lg-block">
+                <h1 class="m-0 display-4 text-uppercase text-primary text-secondary font-weight-normal">
+                    <span>Yangiliklar</span>
+                </h1>
+            </a>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/api" class="nav-item nav-link active dropdown">Yangiliklar</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">Turkumlar</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/api/local" class="dropdown-item">O'zbekiston</a>
+                            <a href="/api/global" class="dropdown-item">Jahon</a>
+                            <a href="/api/sport" class="dropdown-item">Sport</a>
+                            <a href="/api/texnologiya" class="dropdown-item">Texnologiya</a>
+                        </div>
+                    </div>
+                    <a href="/api/latestnews" class="nav-item nav-link dropdown">So'ngi yangiliklar</a>
+                    <a href="/api/contact" class="nav-item nav-link dropdown">Aloqa</a>
+                </div>
+
+                {{#if token}}
+                <a href="/api/add">
+                    <button class="addnews-button">Yangiliklar Qo'shish</button>
+                </a>
+                {{/if}}
+
+                {{#if isAdmin}}
+                <a href="/api/users">
+                    <button class="addnews-button">Foydalanuvchilar</button>
+                </a>
+                {{/if}}
+
+                {{#if token}}
+                <a href="/api/logout">
+                    <button class="login-button">Chiqish</button>
+                </a>
+                {{else}}
+                <a href="/api/login">
+                    <button class="login-button">Kirish</button>
+                </a>
+                {{/if}}
+
+                {{#if token}}
+                {{#if user}}
+                <div class="profile-icon">
+                    <a class="btn bg-warning rounded-circle ms-3" href="/api/profile/{{userId}}">
+                        <small class="fa fa-user"> </small>
+                    </a>
+                </div>
+                {{/if}}
+                {{/if}}
+
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Main News Slider Start -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-7 px-0">
+                <div class="owl-carousel main-carousel position-relative owl-loaded owl-drag">
+                    {{#each item}}
+                    <div class="owl-item" style="width: 100% !important; height: 100% !important;">
+                        <img class="img-fluid" src={{image}}
+                            style="object-fit: cover !important; width: 100% !important; height: 100% !important;">
+                        <div class="overlay">
+                            <a class="h2 m-0 text-white text-uppercase font-weight-bold"
+                                href="/api/news/{{_id}}">{{title}}</a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col-lg-5 px-0">
+                <div class="row mx-0">
+                    {{#each item}}
+                    <div class="col-md-6 px-0">
+                        <div class="position-relative overflow-hidden" style="height: 250px;">
+                            <img class="img-fluid w-100 h-100" src={{image}} style="object-fit: cover;">
+                            <div class="overlay">
+                                <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold" href="/api/news/{{_id}}">{{title}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Yangiliklar</h4>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {{#each news}}
+                    <div class="col">
+                        <div class="card h-100" style="max-width: 350px;">
+                            <!-- Kartaning maksimal kengligini kattalashtirish -->
+                            <img src="{{image}}" class="card-img-top" alt="Card image"
+                                style="height: 200px; object-fit: cover;">
+                            <!-- Rasmning balandligini kattalashtirish -->
+                            <div class="card-body" style="padding: 15px;">
+                                <!-- Karta ichidagi kontentning masofasini oshirish -->
+                                <h5 class="card-title" style="font-size: 1.25rem;">
+                                    <!-- Kartaning sarlavhasini kattalashtirish -->
+                                    <a href="/api/news/{{_id}}" class="card-link">{{title}}</a>
+                                </h5>
+                            </div>
+                            <div class="card-footer" style="padding: 10px; font-size: 1rem;">
+                                <!-- Kartaning pastki qismini kattalashtirish -->
+                                <a class="username" style="margin-right: 50px;" href="/api/oneuser/{{author._id}}">{{author.username}}</a>
+                                <small class="text-body-secondary" style="margin-left: 50px;">{{createdAt}}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
+        <h6>“Yangiliklar” saytida eʼlon qilingan materiallardan nusxa koʻchirish, tarqatish va boshqa shakllarda foydalanish faqat tahririyat yozma roziligi bilan amalga oshirilishi mumkin.
+Guvohnoma: №0987. Berilgan sanasi: 22.06.2015-yil. Muassis: “WEB EXPERT” MCHJ. Tahririyat manzili: 100043, Toshkent shahri, K. Yormatov koʻchasi, 12-uy. Elektron manzil: info@kun.uz.
+Saytda eʼlon qilinayotgan mualliflik maqolalarida keltirilgan fikrlar muallifga tegishli va ular Kun.uz tahririyati nuqtayi nazarini ifoda etmasligi mumkin.
+Ⓣ - maqola va materiallarda qo‘yilgan mazkur belgi ularning tijorat va reklama huquqlari asosida eʼlon qilinganligini bildiradi.</h6>
+    </div>
+</body>

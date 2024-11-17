@@ -1,0 +1,88 @@
+<body>
+    <div class="row align-items-center bg-white py-3 px-lg-5">
+        <div class="col-lg-4">
+            <a href="/api" class="navbar-brand p-0 d-none d-lg-block">
+                <h1 class="m-0 display-4 text-uppercase text-primary text-secondary font-weight-normal">
+                    <span>Yangiliklar.uz</span>
+                </h1>
+            </a>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/api" class="nav-item nav-link active">Yangiliklar</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">Turkumlar</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/api/local" class="dropdown-item">O'zbekiston</a>
+                            <a href="/api/global" class="dropdown-item">Jahon</a>
+                            <a href="/api/sport" class="dropdown-item">Sport</a>
+                            <a href="/api/texnologiya" class="dropdown-item">Texnologiya</a>
+                        </div>
+                    </div>
+                    <a href="/api/latestnews" class="nav-item nav-link">So'ngi yangiliklar</a>
+                    <a href="/api/contact" class="nav-item nav-link">Aloqa</a>
+                </div>
+
+                {{#if token}}
+                <a href="/api/add">
+                    <button class="addnews-button">Yangiliklar Qo'shish</button>
+                </a>
+                {{/if}}
+            </div>
+        </nav>
+    </div>
+
+    {{#if registerError}}
+    <div id="alert-message" class="alert alert-danger d-flex align-items-center alert-dismissible fade show"
+        role="alert">
+        <div class="alert-message">
+            {{registerError}}
+        </div>
+        <button type="button" class="custom-btn-close" aria-label="Close"></button>
+    </div>
+    {{/if}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const closeButton = document.querySelector('.custom-btn-close');
+            const alertMessage = document.getElementById('alert-message');
+
+            if (closeButton && alertMessage) {
+                closeButton.addEventListener('click', function () {
+                    alertMessage.classList.remove('show'); // Bootstrap klassini olib tashlash
+                    alertMessage.classList.add('fade'); // Fade klassini qo'shish
+                    setTimeout(function () {
+                        alertMessage.style.display = 'none'; // Xabarni yashirish
+                    }, 150); // CSS transition vaqti bilan mos keladigan delay
+                });
+            }
+        });
+    </script>
+
+    <div class="SignUp">
+        <div class="register">
+            <form action="/api/register" method="post">
+                <h1>Ro'yhatdan o'tish</h1>
+                <label>Foydalanuvchi nomi</label>
+                <input name="username" type="text" required="text">
+                <label>Email</label>
+                <input name="email" type="email" required="email">
+                <label>Parol</label>
+                <input name="password" type="password" required="password">
+                <button class="register-button" type="submit">Ro'yxatdan o'tish</button>
+                <div class="acc-not">Hisobingiz yo'q <a href="/api/login">Kirish</a></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-dark pt-5 px-sm-3 px-md-5 mt-5">
+    </div>
+</body>

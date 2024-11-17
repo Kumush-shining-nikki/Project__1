@@ -1,0 +1,157 @@
+<body>
+    <div class="row align-items-center bg-white py-3 px-lg-5">
+        <div class="col-lg-4">
+            <a href="/api" class="navbar-brand p-0 d-none d-lg-block">
+                <h1 class="m-0 display-4 text-uppercase text-primary text-secondary font-weight-normal">
+                    <span>Yangiliklar.uz</span>
+                </h1>
+            </a>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/api" class="nav-item nav-link">Yangiliklar</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">Turkumlar</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/api/local" class="dropdown-item">O'zbekiston</a>
+                            <a href="/api/global" class="dropdown-item">Jahon</a>
+                            <a href="/api/sport" class="dropdown-item">Sport</a>
+                            <a href="/api/texnologiya" class="dropdown-item">Texnologiya</a>
+                        </div>
+                    </div>
+                    <a href="/api/latestnews" class="nav-item nav-link">So'ngi yangiliklar</a>
+                    <a href="/api/contact" class="nav-item nav-link">Aloqa</a>
+                </div>
+
+                {{#if token}}
+                <a href="/api/add">
+                    <button class="addnews-button">Yangiliklar Qo'shish</button>
+                </a>
+                {{/if}}
+
+                {{#if token}}
+                <a href="/api/logout">
+                    <button class="login-button">Chiqish</button>
+                </a>
+                {{else}}
+                <a href="/api/login">
+                    <button class="login-button">Kirish</button>
+                </a>
+                {{/if}}
+
+                {{#if token}}
+                {{#if user}}
+                <div class="profile-icon">
+                    <a class="btn bg-warning rounded-circle ms-3" href="/api/profile/{{userId}}">
+                        <small class="fa fa-user"> </small>
+                    </a>
+                </div>
+                {{/if}}
+                {{/if}}
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Card Start -->
+     <style>
+        /* Kontent konteyneri */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Yangilik elementlari */
+        .news-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .news-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .news-item h2 {
+            font-size: 28px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .news-item p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            line-height: 10px;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            bottom: 10px; /* Pastki tomon */
+            right: 10px;  /* O'ng tomon */
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+    <div class="container">
+        <!-- Yangilik elementi -->
+        <div class="news-item">
+            <img src={{news.image}} alt="Yangilik Rasm">
+            <h2>{{news.title}}</h2>
+            <p>{{news.content}}</p>
+
+            {{#if isAdmin}}
+            <a href="/api/updatenews/{{news._id}}" class="btn">Tahrirlash</a>
+            <form action="/api/deletenews/{{news._id}}" method="post" style="display:inline; vertical-align: middle;">
+                <button class="delete-button" type="submit">O'chirish</button>
+            </form>
+            {{/if}}
+        </div>
+    </div>
+
+</body>

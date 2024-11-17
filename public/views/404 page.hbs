@@ -1,0 +1,78 @@
+<body>
+    <div class="row align-items-center bg-white py-3 px-lg-5">
+        <div class="col-lg-4">
+            <a href="/api" class="navbar-brand p-0 d-none d-lg-block">
+                <h1 class="m-0 display-4 text-uppercase text-primary text-secondary font-weight-normal">
+                    <span>Yangiliklar.uz</span>
+                </h1>
+            </a>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/api" class="nav-item nav-link">Yangiliklar</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">Turkumlar</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/api/local" class="dropdown-item">O'zbekiston</a>
+                            <a href="/api/global" class="dropdown-item">Jahon</a>
+                            <a href="/api/sport" class="dropdown-item">Sport</a>
+                            <a href="/api/texnologiya" class="dropdown-item">Texnologiya</a>
+                        </div>
+                    </div>
+                    <a href="/api/latestnews" class="nav-item nav-link">So'ngi yangiliklar</a>
+                    <a href="/api/contact" class="nav-item nav-link">Aloqa</a>
+                </div>
+
+                {{#if token}}
+                    <a href="/api/add">
+                        <button class="addnews-button">Yangiliklar Qo'shish</button>
+                    </a>
+                {{/if}}
+
+            {{#if token}}
+                <a href="/api/logout">
+                    <button class="login-button">Chiqish</button>
+                </a>
+                {{else}}
+                <a href="/api/login">
+                    <button class="login-button">Kirish</button>
+                </a>
+            {{/if}}
+
+                {{#if token}}
+                <div class="profile-icon">
+                    <a class="btn bg-warning rounded-circle ms-3" href="/api/profile/:id">
+                        <small class="fa fa-user"> </small>
+                    </a>
+                </div>
+                {{/if}}
+
+            </div>
+        </nav>
+    </div>
+    
+    <div class="container-fluid bg-light py-5">
+        <div class="container py-5 text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s"
+                    style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                    <i class="far fa-frown-open display-1 text-primary mb-4" style="width: 80px; height: 80px;"></i>
+                    <h1 class="display-1">404</h1>
+                    <h1 class="mb-4">Topilmadi</h1>
+                    <p class="mb-4">Kechirasiz, siz qidirgan sahifa bizning veb-saytimizda mavjud emas!</p>
+                    <a class="btn btn-warning rounded-pill py-3 px-5" href="/api">Bosh sahivaga qaytish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-dark pt-5 px-sm-3 px-md-5 mt-5"></div>
+</body>
